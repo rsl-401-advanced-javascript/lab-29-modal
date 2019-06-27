@@ -8,7 +8,7 @@ class Form extends React.Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    let data = superagent.get('https://swapi.co/api/people/');
+    let data = await superagent.get('https://swapi.co/api/people/');
     let count = data.body.count;
     let people = data.body.results.reduce((list, person) => {
       list[person.name] = person.url;

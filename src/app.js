@@ -1,6 +1,8 @@
 import React from 'react';
 
 import Form from './form.js';
+import Modal from './modal';
+import If from './if';
 
 import './styles.scss';
 
@@ -22,11 +24,19 @@ class App extends React.Component {
     this.setState({ selectedPerson: person });
   };
 
+  deselectPerson = () => {
+    this.setState({ selectedPerson: '' });
+  }
+
   render() {
     return (
       <>
         <Form prompt="Get some Star Wars Folks..." handler={this.handleForm} />
-        <h3>Selected Character: {this.state.selectedPerson}</h3>
+        <If condition={this.state.selectedPerson}>
+          <Modal close={this.deselectPerson}>
+            <h3>Selected Character: {this.state.selectedPerson}</h3>
+          </Modal>
+        </If>
         <ul>
           {Object.keys(this.state.people).map((person, idx) => {
             return (
